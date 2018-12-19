@@ -1,9 +1,8 @@
-<p align="center">
-  <img src="https://bitbucket.org/iwencai/art-stuff/raw/master/scrope/logo/Scrope.png" width="300" alt="scrope" />
-</p>
-<h3 align="center">Scrope</h3>
-<p align="center">Make your Internet debugging easier.</p>
+# Scrope
 
+![scrope](https://bitbucket.org/iwencai/art-stuff/raw/master/scrope/logo/Scrope.png)
+
+*Make your Internet debugging easier!*
 
 ---
 
