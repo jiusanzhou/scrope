@@ -1,0 +1,9 @@
+model: &model
+  _:
+    readable: true
+    writable: false
+  ID: int64
+  UID: string@uuid,db:"type:var(100)";value:uuid()
+  createAt: timestamp,value:now()
+  updatedAt: timestamp,value:now()
+  deleteAt: \*timestamp,grpc:"-"
