@@ -8341,6 +8341,10 @@ video {
 
 @import "~@blueprintjs/core/lib/css/blueprint.css";
 
+.bp3-focus-disabled :focus, .bp3-focus-disabled :focus ~ .bp3-control-indicator {
+  outline: none !important;
+}
+
 @media (min-width: 640px) {
   .sm\:sr-only {
     position: absolute;
