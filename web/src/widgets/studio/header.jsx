@@ -36,7 +36,10 @@ const NSChooser = ({ cur }) => {
             <span className="flex items-center"><Avatar className="mr-2" />同顺云</span>
         } />
         <Menu>{ _namespaces.map(i => <MenuItem text={
-            <span className="flex items-center"><Avatar className="mr-2" />{ i.name }</span>
+            <span className="flex items-center">
+                <Icon icon="drag-handle-vertical" />
+                <Avatar className="mr-2" />{ i.name }
+            </span>
         }></MenuItem>) }</Menu>
     </Popover>
 }

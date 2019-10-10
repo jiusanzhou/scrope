@@ -8341,8 +8341,14 @@ video {
 
 @import "~@blueprintjs/core/lib/css/blueprint.css";
 
-.bp3-focus-disabled :focus, .bp3-focus-disabled :focus ~ .bp3-control-indicator {
-  outline: none !important;
+@import "~@blueprintjs/icons/lib/css/blueprint-icons.css";
+
+@import "~@blueprintjs/select/lib/css/blueprint-select.css";
+
+@import "~@blueprintjs/table/lib/css/table.css";
+
+.group:hover .group-hover\:flex {
+  display: flex;
 }
 
 @media (min-width: 640px) {

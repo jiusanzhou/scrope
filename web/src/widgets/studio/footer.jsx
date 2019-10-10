@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import {
     Button, Divider,
     Dialog, Tabs, Tab, Classes,
-    Icon, Intent,
+    Icon, Intent, Tooltip, Spinner,
 } from '@blueprintjs/core'
 
 const Settings = () => {
@@ -20,8 +20,8 @@ const Settings = () => {
                 vertical="vertical">
                     <Tab id="rx" title="通用" panel={ null } />
                     <Tab id="ng" title="高级" panel={ null } />
-                    <Tab id="mb" title="其他" panel={ null } panelClassName="ember-panel" />
-                    <Tab id="bb" disabled={true} panel={ null } />
+                    <Tab id="mb" title="其他" panel={ null } />
+                    <Tab id="xb" title="关于" panel={ null } />
                 </Tabs>
             </div>
         </Dialog>
@@ -29,15 +29,18 @@ const Settings = () => {
 }
 
 const _status = {
+    recording: <Spinner size={ 0 } intent={ Intent.SUCCESS } />,
     success: Intent.SUCCESS,
     error: Intent.DANGER,
     warn: Intent.WARNING,
 }
 
-const Status = ({ status = 'success' }) => {
+const Status = ({ status = 'recording', msg = '正在录制' }) => {
     let intent = _status[status] || Intent.NONE
     return <>
-        <Icon icon="dot" intent={ intent } />
+        <Tooltip content={ msg }>
+            { typeof intent === 'string' ? <Icon icon="dot" intent={ intent } /> : intent }
+        </Tooltip>
     </>
 }
 
