@@ -8351,6 +8351,18 @@ video {
   display: flex;
 }
 
+::-webkit-scrollbar{
+  width:5px;
+  height:5px;
+  border-radius:5px;
+  background-color:#f1f1f1;
+}
+
+::-webkit-scrollbar-thumb{
+  border-radius:5px;
+  background-color:#c0c0c0;
+}
+
 @media (min-width: 640px) {
   .sm\:sr-only {
     position: absolute;

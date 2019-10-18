@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import {
     ButtonGroup, Button, Icon,
     Position, Tooltip, Tree,
-    Intent,
+    Intent, Text,
     Classes,
 } from '@blueprintjs/core'
 
@@ -55,7 +55,7 @@ const ListTitleBar = ({ capturing = false, mode = 'list', setMode = () => {} }) 
             <Button small icon='upload' onClick={ () => {} } disabled={ capturing } />
         </Tooltip>
         <ButtonGroup className="ml-2">
-            { _listModes.map( i => <Tooltip content={ i.label }>
+            { _listModes.map((i, index) => <Tooltip key={index} content={ i.label }>
                 <Button small icon={ i.icon } onClick={ () => setMode(i.type) } active={ mode === i.type } />
             </Tooltip> ) }
         </ButtonGroup>
@@ -76,18 +76,6 @@ const columns = [
         }
     },
     {
-        name: '方法',
-        key: 'request.method',
-        width: 50,
-        fn: ({ request: { method } }) => method
-    },
-    {
-        name: '状态',
-        key: 'response.status',
-        width: 50,
-        fn: ({ response: { status } }) => status
-    },
-    {
         name: '主机',
         key: 'request.url',
         width: 150,
@@ -101,6 +89,18 @@ const columns = [
             let _ = new URL(url)
             return  _.pathname + _.search
         }
+    },
+    {
+        name: '方法',
+        key: 'request.method',
+        width: 50,
+        fn: ({ request: { method } }) => method
+    },
+    {
+        name: '状态',
+        key: 'response.status',
+        width: 50,
+        fn: ({ response: { status } }) => status
     },
     {
         name: '开始',
@@ -134,7 +134,7 @@ const _generateTableColumn = ({ index, name }) => {
         let v = _getCellData(rowIndex, columnIndex)
         let intent
         if ( columns[columnIndex].key === 'response.status' ) {
-            if ( v == 200 ) {
+            if ( v === 200 ) {
                 intent = 'success'
             } else if ( v < 300 ) {
                 intent = 'warning'
@@ -142,7 +142,10 @@ const _generateTableColumn = ({ index, name }) => {
                 intent = 'danger'
             }
         }
-        return <Cell intent={ intent }>{ v }</Cell>
+        return <Cell intent={ intent }>
+            <Text
+            onClick={()=>{ console.log(`点击行数: ${rowIndex} 列数: ${columnIndex}`) }}>{v}</Text>
+        </Cell>
     }
     const columnHeaderCellRenderer = () => <ColumnHeaderCell name={name} />
     return <Column
@@ -153,11 +156,24 @@ const _generateTableColumn = ({ index, name }) => {
 }
 
 const ViewList = () => {
+    // const [ selected, setSelected ] = useState(null)
     return <Table
     className="text-base"
     enableRowResizing={ false }
-    selectionModes={ SelectionModes.ROWS_ONLY }
+    selectionModes={ SelectionModes.ROWS_AND_CELLS }
     columnWidths={ columns.map(i => i.width) }
+    defaultRowHeight={ 28 }
+    getCellClipboardData={(rowIndex, columnIndex) => {
+        console.log(`复制行数: ${rowIndex} 列数: ${columnIndex}`)
+    }}
+    onSelection={(selectedRegions) => {
+        // update request view
+    }}
+    selectedRegionTransform={(regions, event) => {
+        // convert cell to row
+        return { rows: regions.rows }
+    }}
+    onColumnWidthChanged={()=>{}}
     numRows={ log.entries.length }>
         { columns.map((col, index) => _generateTableColumn({index, ...col})) }
     </Table>

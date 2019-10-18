@@ -35,7 +35,7 @@ const NSChooser = ({ cur }) => {
         <Button rightIcon="expand-all" small minimal text={
             <span className="flex items-center"><Avatar className="mr-2" />同顺云</span>
         } />
-        <Menu>{ _namespaces.map(i => <MenuItem text={
+        <Menu>{ _namespaces.map((i, index) => <MenuItem key={index} text={
             <span className="flex items-center">
                 <Icon icon="drag-handle-vertical" />
                 <Avatar className="mr-2" />{ i.name }
